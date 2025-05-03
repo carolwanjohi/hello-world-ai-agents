@@ -15,18 +15,10 @@ public class EnquiryAgentController {
 
     @PostMapping("/ask")
     public String askQuestion(@RequestBody String question) {
-        Boolean isInternalKnowledge = isInternalKnowledge(question);
-
-        if (isInternalKnowledge) {
-            String answer =  getInternalKnowledge(question);
-            assert answer != null;
-            if (answer.toLowerCase().contains("sorry")) {
-                return getExternalKnowledge(question);
-            }
-            return "Enquiry Agent: " + question + " \nKnowledge Based Response: " + answer;
-        } else {
-            return getExternalKnowledge(question);
+        if (isInternalKnowledge(question)) {
+            return getInternalKnowledge(question);
         }
+        return getExternalKnowledge(question);
     }
 
     private Boolean isInternalKnowledge(String query) {
@@ -38,7 +30,12 @@ public class EnquiryAgentController {
 
     private String getInternalKnowledge(String query) {
         String url = "http://localhost:8080/knowledge/internal";
-        return restTemplate.postForObject(url, query, String.class);
+        String answer = restTemplate.postForObject(url, query, String.class);
+        assert answer != null;
+        if (answer.toLowerCase().contains("sorry")) {
+            return getExternalKnowledge(query);
+        }
+        return "Enquiry Agent: " + query + " \nKnowledge Based Response: " + answer;
     }
 
     private String getExternalKnowledge(String query) {
