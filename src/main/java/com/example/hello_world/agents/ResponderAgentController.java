@@ -1,7 +1,7 @@
 package com.example.hello_world.agents;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("responder")
 public class ResponderAgentController {
 
-    @GetMapping("/respond")
-    public String respond(@RequestParam String message) {
+    @PostMapping("/response")
+    public String response(@RequestBody String message) {
         if ("Hello".equalsIgnoreCase(message)) {
             return "Hello, how can I help you?";
         } else if ("Goodbye".equalsIgnoreCase(message)) {
