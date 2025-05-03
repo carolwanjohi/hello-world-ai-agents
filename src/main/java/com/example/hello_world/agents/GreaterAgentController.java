@@ -20,7 +20,8 @@ public class GreaterAgentController {
     @PostMapping("/say")
     public String sayHello(@RequestBody String query) {
         String url = "http://localhost:8080/responder/response";
-
-        return restTemplate.postForObject(url, query, String.class);
+        String response = restTemplate.postForObject(url, query, String.class);
+        assert response != null;
+        return "Greater Agent: " + query + " \nResponder Agent Response: " + response;
     }
 }
