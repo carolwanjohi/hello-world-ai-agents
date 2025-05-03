@@ -1,19 +1,17 @@
 package com.example.hello_world.agents;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("enquiry")
 public class EnquiryAgentController {
     private final RestTemplate restTemplate;
-
-    public EnquiryAgentController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
 
     @PostMapping("/ask")
     public String askQuestion(@RequestBody String question) {
