@@ -1,6 +1,6 @@
 # Hello World
 
-A proejct to learn about AI agents and their interactions.
+A project to learn about AI agents and their interactions.
 
 ## AI Agents
 
