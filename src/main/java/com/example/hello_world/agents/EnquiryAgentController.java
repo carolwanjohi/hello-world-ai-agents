@@ -40,6 +40,8 @@ public class EnquiryAgentController {
 
     private String getExternalKnowledge(String query) {
         String url = "http://localhost:8080/escalation/escalate";
-        return restTemplate.postForObject(url, query, String.class);
+        String answer = restTemplate.postForObject(url, query, String.class);
+        assert answer != null;
+        return answer;
     }
 }
